@@ -66,7 +66,7 @@ function StatsCard({
         <div className="text-2xl font-bold">
           {loading && (
             <Skeleton>
-              <span>0</span>
+              <span className="opacity-0">0</span>
             </Skeleton>
           )}
         </div>

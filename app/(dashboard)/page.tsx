@@ -1,5 +1,6 @@
 import { GetFormStats } from "@/actions/form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 import { FaWpforms } from "react-icons/fa";
@@ -13,6 +14,9 @@ export default function Home() {
       <Suspense fallback={<StatsCards loading={true} />}>
         <CardStatsWarpper />
       </Suspense>
+      <Separator className="my-6" />
+      <h2 className="text-4xl font-bold col-span-2">Your forms</h2>
+      <Separator className="my-6" />
     </div>
   );
 }

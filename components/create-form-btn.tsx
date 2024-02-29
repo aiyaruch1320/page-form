@@ -1,5 +1,6 @@
 "use client";
 
+import { CreateForm } from "@/actions/form";
 import { formSchema, formSchemaType } from "@/schemas/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -30,9 +31,13 @@ function CreateFormBtn() {
   const form = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
   });
-  function onSubmit(values: formSchemaType) {
+  async function onSubmit(values: formSchemaType) {
     try {
-      console.log(values);
+      await CreateForm(values);
+      toast({
+        title: "Success",
+        description: "Form created successfully",
+      });
     } catch (error) {
       toast({
         title: "Error",

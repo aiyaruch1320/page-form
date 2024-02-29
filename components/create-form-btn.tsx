@@ -41,7 +41,8 @@ function CreateFormBtn() {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Something went wrong, please try again later",
+        description:
+          "Sorry, we couldn't create the form. Please try again later.",
         variant: "destructive",
       });
     }

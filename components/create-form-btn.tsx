@@ -1,9 +1,9 @@
 "use client";
 
+import { formSchema, formSchemaType } from "@/schemas/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { ImSpinner2 } from "react-icons/im";
-import * as z from "zod";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -25,13 +25,6 @@ import {
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { toast } from "./ui/use-toast";
-
-const formSchema = z.object({
-  name: z.string().min(4),
-  description: z.string().optional(),
-});
-
-type formSchemaType = z.infer<typeof formSchema>;
 
 function CreateFormBtn() {
   const form = useForm<formSchemaType>({

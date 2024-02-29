@@ -24,6 +24,7 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import { toast } from "./ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(4),
@@ -37,7 +38,15 @@ function CreateFormBtn() {
     resolver: zodResolver(formSchema),
   });
   function onSubmit(values: formSchemaType) {
-    console.log(values);
+    try {
+      console.log(values);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong, please try again later",
+        variant: "destructive",
+      });
+    }
   }
   return (
     <Dialog>

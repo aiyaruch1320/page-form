@@ -1,10 +1,17 @@
 import { GetFormStats, GetForms } from "@/actions/form";
 import CreateFormBtn from "@/components/create-form-btn";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Form } from "@prisma/client";
+import { formatDistance } from "date-fns";
 import { Suspense } from "react";
 import { FaWpforms } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
@@ -153,6 +160,9 @@ function FormCard({ form }: { form: Form }) {
             <Badge variant={"destructive"}>Draft</Badge>
           )}
         </CardTitle>
+        <CardDescription>
+          {formatDistance(form.createdAt, new Date(), { addSuffix: true })}
+        </CardDescription>
       </CardHeader>
     </Card>
   );

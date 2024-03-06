@@ -1,5 +1,6 @@
 import { GetFormStats, GetForms } from "@/actions/form";
 import CreateFormBtn from "@/components/create-form-btn";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -144,10 +145,13 @@ function FormCard({ form }: { form: Form }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>
-          <span className="flex items-center gap-2 justify-between">
-            {form.name}
-          </span>
+        <CardTitle className="flex items-center gap-2 justify-between">
+          <span className="truncate font-bold">{form.name}</span>
+          {form.published ? (
+            <Badge>Published</Badge>
+          ) : (
+            <Badge variant={"destructive"}>Draft</Badge>
+          )}
         </CardTitle>
       </CardHeader>
     </Card>

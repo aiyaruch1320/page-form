@@ -160,8 +160,16 @@ function FormCard({ form }: { form: Form }) {
             <Badge variant={"destructive"}>Draft</Badge>
           )}
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="flex items-center justify-between text-muted-foreground text-sm">
           {formatDistance(form.createdAt, new Date(), { addSuffix: true })}
+          {!form.published && (
+            <span className="flex items-center gap-2">
+              <LuView className="text-muted-foreground" />
+              <span>{form.visits.toLocaleString()}</span>
+              <FaWpforms className="text-muted-foreground" />
+              <span>{form.submission.toLocaleString()}</span>
+            </span>
+          )}
         </CardDescription>
       </CardHeader>
     </Card>

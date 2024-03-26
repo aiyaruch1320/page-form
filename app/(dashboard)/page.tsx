@@ -1,10 +1,12 @@
 import { GetFormStats, GetForms } from "@/actions/form";
 import CreateFormBtn from "@/components/create-form-btn";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -12,11 +14,13 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Form } from "@prisma/client";
 import { formatDistance } from "date-fns";
+import Link from "next/link";
 import { Suspense } from "react";
-import { FaWpforms } from "react-icons/fa";
+import { FaEdit, FaWpforms } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
 import { LuView } from "react-icons/lu";
 import { TbArrowBounce } from "react-icons/tb";
+import { BiRightArrowAlt } from "react-icons/bi";
 
 export default function Home() {
   return (
@@ -172,6 +176,24 @@ function FormCard({ form }: { form: Form }) {
           )}
         </CardDescription>
       </CardHeader>
+      <CardContent className="h-[20px] truncate text-sm text-muted-foreground">
+        {form.description || "No description"}
+      </CardContent>
+      <CardFooter>
+        {form.published ? (
+          <Button asChild className="w-full mt-20 text-md gap-4">
+            <Link href={`/forms/${form.id}`}>
+              View submissions <BiRightArrowAlt />
+            </Link>
+          </Button>
+        ) : (
+          <Button asChild className="w-full mt-20 text-md gap-4">
+            <Link href={`/builder/${form.id}`}>
+              Edit form <FaEdit />
+            </Link>
+          </Button>
+        )}
+      </CardFooter>
     </Card>
   );
 }

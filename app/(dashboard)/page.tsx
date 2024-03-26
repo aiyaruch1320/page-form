@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <div className="container pt-4">
       <Suspense fallback={<StatsCards loading={true} />}>
-        <CardStatsWarpper />
+        <CardStatsWrapper />
       </Suspense>
       <Separator className="my-6" />
       <h2 className="text-4xl font-bold col-span-2">Your forms</h2>
@@ -47,7 +47,7 @@ export default function Home() {
   );
 }
 
-async function CardStatsWarpper() {
+async function CardStatsWrapper() {
   const stats = await GetFormStats();
   return <StatsCards loading={false} data={stats} />;
 }
@@ -181,13 +181,13 @@ function FormCard({ form }: { form: Form }) {
       </CardContent>
       <CardFooter>
         {form.published ? (
-          <Button asChild className="w-full mt-20 text-md gap-4">
+          <Button asChild className="w-full mt-2 text-md gap-4">
             <Link href={`/forms/${form.id}`}>
               View submissions <BiRightArrowAlt />
             </Link>
           </Button>
         ) : (
-          <Button asChild className="w-full mt-20 text-md gap-4">
+          <Button asChild className="w-full mt-2 text-md gap-4">
             <Link href={`/builder/${form.id}`}>
               Edit form <FaEdit />
             </Link>

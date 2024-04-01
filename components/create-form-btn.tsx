@@ -27,18 +27,21 @@ import {
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { toast } from "./ui/use-toast";
+import { useRouter } from "next/navigation";
 
 function CreateFormBtn() {
+  const router = useRouter();
   const form = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
   });
   async function onSubmit(values: formSchemaType) {
     try {
-      await CreateForm(values);
+      const formId = await CreateForm(values);
       toast({
         title: "Success",
         description: "Form created successfully",
       });
+      router.push(`/builder/${formId}`);
     } catch (error) {
       toast({
         title: "Error",

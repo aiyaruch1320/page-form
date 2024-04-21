@@ -2,6 +2,7 @@
 
 import { Form } from "@prisma/client";
 import React from "react";
+import PreviewDialogBtn from "./preview-dialog-btn";
 
 function FormBuilder({ form }: { form: Form }) {
   return (
@@ -11,6 +12,9 @@ function FormBuilder({ form }: { form: Form }) {
           <span className="text-muted-foreground mr-2">Form:</span>
           {form.name}
         </h2>
+        <div className="flex items-center gap-2">
+          <PreviewDialogBtn />
+        </div>
       </div>
     </main>
   );

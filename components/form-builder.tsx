@@ -3,6 +3,8 @@
 import { Form } from "@prisma/client";
 import React from "react";
 import PreviewDialogBtn from "./preview-dialog-btn";
+import SaveFormBtn from "./save-form-btn";
+import PublishFormBtn from "./publish-form-btn";
 
 function FormBuilder({ form }: { form: Form }) {
   return (
@@ -14,6 +16,12 @@ function FormBuilder({ form }: { form: Form }) {
         </h2>
         <div className="flex items-center gap-2">
           <PreviewDialogBtn />
+          {!form.published && (
+            <>
+              <SaveFormBtn />
+              <PublishFormBtn />
+            </>
+          )}
         </div>
       </div>
     </main>

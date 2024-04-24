@@ -6,7 +6,7 @@ function SaveFormBtn() {
   return (
     <Button variant={"outline"} className="gap-2">
       <HiSaveAs className="h-4 w-4" />
-      save
+      Save
     </Button>
   );
 }

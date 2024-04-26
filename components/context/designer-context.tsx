@@ -8,7 +8,7 @@ type DesignerContextType = {
   addElement: (index: number, element: FormElementInstance) => void;
 };
 
-const DesignerContext = createContext<DesignerContextType | null>(null);
+export const DesignerContext = createContext<DesignerContextType | null>(null);
 
 export default function DesignerContextProvider({
   children,

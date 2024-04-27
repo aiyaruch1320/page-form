@@ -2,9 +2,10 @@
 
 import React from "react";
 import DesignerSidebar from "./designer-sidebar";
-import { useDroppable } from "@dnd-kit/core";
+import { DragEndEvent, useDndMonitor, useDroppable } from "@dnd-kit/core";
 import { cn } from "@/lib/utils";
 import useDesigner from "./hooks/use-designer";
+import { ElementsType, FormElements } from "./form-elements";
 
 function Designer() {
   const { elements, addElement } = useDesigner();
@@ -15,6 +16,24 @@ function Designer() {
       isDesignerDropArea: true,
     },
   });
+
+  useDndMonitor({
+    onDragEnd: (event: DragEndEvent) => {
+      const { active, over } = event;
+      if (!active || !over) return;
+
+      const isDesignerBtnElement = active.data?.current?.isDesignerBtnElement;
+
+      if (isDesignerBtnElement) {
+        const type = active.data?.current?.type;
+        const id = self.crypto.randomUUID();
+        const newElement = FormElements[type as ElementsType].construct(id);
+
+        addElement(0, newElement);
+      }
+    },
+  });
+
   return (
     <div className="flex w-full h-full">
       <div className="p-4 w-full">
@@ -33,6 +52,11 @@ function Designer() {
             <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">
               Drop here
             </p>
+          )}
+          {elements.length > 0 && (
+            <div className="flex flex-col text-background w-full gap-2 p-4">
+              Designer Elements
+            </div>
           )}
         </div>
       </div>

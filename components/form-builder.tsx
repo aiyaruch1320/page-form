@@ -1,7 +1,7 @@
 "use client";
 
 import { Form } from "@prisma/client";
-import React from "react";
+import React, { useId } from "react";
 import PreviewDialogBtn from "./preview-dialog-btn";
 import SaveFormBtn from "./save-form-btn";
 import PublishFormBtn from "./publish-form-btn";
@@ -10,8 +10,9 @@ import { DndContext } from "@dnd-kit/core";
 import DragOverlayWrapper from "./drag-overlay-wrapper";
 
 function FormBuilder({ form }: { form: Form }) {
+  const id = useId();
   return (
-    <DndContext>
+    <DndContext id={id}>
       <main className="flex flex-col w-full">
         <nav className="flex justify-between border-b-2 p-4 gap-3 items-center">
           <h2 className="truncate font-medium">

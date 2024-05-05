@@ -74,7 +74,7 @@ function Designer() {
 
 function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
   const DesignerComponent = FormElements[element.type].designerComponent;
-  return <DesignerComponent />;
+  return <DesignerComponent elementInstance={element} />;
 }
 
 export default Designer;

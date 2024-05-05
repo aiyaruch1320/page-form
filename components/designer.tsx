@@ -5,7 +5,11 @@ import DesignerSidebar from "./designer-sidebar";
 import { DragEndEvent, useDndMonitor, useDroppable } from "@dnd-kit/core";
 import { cn } from "@/lib/utils";
 import useDesigner from "./hooks/use-designer";
-import { ElementsType, FormElements } from "./form-elements";
+import {
+  ElementsType,
+  FormElementInstance,
+  FormElements,
+} from "./form-elements";
 
 function Designer() {
   const { elements, addElement } = useDesigner();
@@ -55,7 +59,9 @@ function Designer() {
           )}
           {elements.length > 0 && (
             <div className="flex flex-col text-background w-full gap-2 p-4">
-              Designer Elements
+              {elements.map((element) => (
+                <DesignerElementWrapper key={element.id} element={element} />
+              ))}
             </div>
           )}
         </div>
@@ -63,6 +69,11 @@ function Designer() {
       <DesignerSidebar />
     </div>
   );
+}
+
+function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
+  const DesignerComponent = FormElements[element.type].designerComponent;
+  return <DesignerComponent />;
 }
 
 export default Designer;

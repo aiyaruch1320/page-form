@@ -6,6 +6,8 @@ import {
   FormElement,
   FormElementInstance,
 } from "../form-elements";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 const type: ElementsType = "TextField";
 
@@ -42,5 +44,17 @@ function DesignerComponent({
   elementInstance: FormElementInstance;
 }) {
   const element = elementInstance as CustomInstance;
-  return <div className="text-white">{element.extraAttributes.label}</div>;
+  const { label, required, helperText, placeHolder } = element.extraAttributes;
+  return (
+    <div className="flex flex-col gap-2 w-full">
+      <Label>
+        {label}
+        {required && "*"}
+      </Label>
+      <Input readOnly disabled placeholder={placeHolder} />
+      {helperText && (
+        <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
+      )}
+    </div>
+  );
 }

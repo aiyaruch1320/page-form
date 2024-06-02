@@ -114,7 +114,7 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
         <>
           <div className="absolute right-0 h-full">
             <Button
-              className="flex justify-center h-full border rounded-md rounded-l-none bg-red-500"
+              className="flex border rounded-md rounded-r-none rounded-t-none bg-red-500"
               variant={"outline"}
               onClick={() => removeElement(element.id)}
             >

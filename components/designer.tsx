@@ -128,7 +128,12 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
           </div>
         </>
       )}
-      <div className="flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none">
+      <div
+        className={cn(
+          "flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none opactity-100",
+          isMouseOver && "opacity-30"
+        )}
+      >
         <DesignerComponent elementInstance={element} />
       </div>
     </div>

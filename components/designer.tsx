@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import DesignerSidebar from "./designer-sidebar";
 import { DragEndEvent, useDndMonitor, useDroppable } from "@dnd-kit/core";
 import { cn } from "@/lib/utils";
@@ -73,8 +73,40 @@ function Designer() {
 }
 
 function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
+  const topHalf = useDroppable({
+    id: `${element.id}-top`,
+    data: {
+      type: element.type,
+      elementId: element.id,
+      isTopHalfDesignerElement: true,
+    },
+  });
+
+  const bottomHalf = useDroppable({
+    id: `${element.id}-top`,
+    data: {
+      type: element.type,
+      elementId: element.id,
+      isBottomHalfDesignerElement: true,
+    },
+  });
+
   const DesignerComponent = FormElements[element.type].designerComponent;
-  return <DesignerComponent elementInstance={element} />;
+  return (
+    <div className="relative h-[120px]rflex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset">
+      <div
+        ref={topHalf.setNodeRef}
+        className={cn("absolute w-full h-1/2 rounded-t-md")}
+      />
+      <div
+        ref={bottomHalf.setNodeRef}
+        className="absolute bottom-0 h-1/2 rounded-b-md"
+      />
+      <div className="flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none">
+        <DesignerComponent elementInstance={element} />
+      </div>
+    </div>
+  );
 }
 
 export default Designer;

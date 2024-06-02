@@ -10,6 +10,8 @@ import {
   FormElementInstance,
   FormElements,
 } from "./form-elements";
+import { Button } from "./ui/button";
+import { BiSolidTrash } from "react-icons/bi";
 
 function Designer() {
   const { elements, addElement } = useDesigner();
@@ -73,6 +75,7 @@ function Designer() {
 }
 
 function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
+  const { removeElement } = useDesigner();
   const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
   const topHalf = useDroppable({
     id: `${element.id}-top`,
@@ -109,6 +112,15 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
       />
       {isMouseOver && (
         <>
+          <div className="absolute right-0 h-full">
+            <Button
+              className="flex justify-center h-full border rounded-md rounded-l-none bg-red-500"
+              variant={"outline"}
+              onClick={() => removeElement(element.id)}
+            >
+              <BiSolidTrash className="h-6 w-6" />
+            </Button>
+          </div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse">
             <p className="text-muted-foreground text-sm">
               Click for properties or drag to move

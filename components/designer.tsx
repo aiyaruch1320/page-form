@@ -104,7 +104,7 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
     >
       <div
         ref={topHalf.setNodeRef}
-        className={cn("absolute w-full h-1/2 rounded-t-md")}
+        className="absolute w-full h-1/2 rounded-t-md"
       />
       <div
         ref={bottomHalf.setNodeRef}

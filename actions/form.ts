@@ -54,13 +54,14 @@ export async function CreateForm(data: formSchemaType) {
     }
 
     const { name, description } = validation.data;
-    await prisma.form.create({
+    const { id } = await prisma.form.create({
       data: {
         userId: user.id,
         name,
         description,
       },
     });
+    return id;
   } catch (error) {
     throw new Error("Form not created");
   }

@@ -92,7 +92,7 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
   });
 
   const bottomHalf = useDroppable({
-    id: `${element.id}-top`,
+    id: `${element.id}-bottom`,
     data: {
       type: element.type,
       elementId: element.id,

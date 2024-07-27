@@ -145,16 +145,20 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
           </div>
         </>
       )}
+      {topHalf.isOver && (
+        <div className="absolute top-0 w-full rounded-md h-[7px] bg-primary rounded-b-none"></div>
+      )}
       <div
         className={cn(
           "flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none opactity-100",
-          isMouseOver && "opacity-30",
-          topHalf.isOver && "border-t-4 border-t-foreground",
-          bottomHalf.isOver && "border-b-4 border-b-foreground"
+          isMouseOver && "opacity-30"
         )}
       >
         <DesignerComponent elementInstance={element} />
       </div>
+      {bottomHalf.isOver && (
+        <div className="absolute bottom-0 w-full rounded-md h-[7px] bg-primary rounded-t-none"></div>
+      )}
     </div>
   );
 }

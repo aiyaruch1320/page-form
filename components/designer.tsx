@@ -80,7 +80,7 @@ function Designer() {
 }
 
 function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
-  const { removeElement } = useDesigner();
+  const { removeElement, selectedElement, setSelectedElement } = useDesigner();
   const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
   const topHalf = useDroppable({
     id: `${element.id}-top`,
@@ -110,6 +110,7 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
   });
 
   const DesignerComponent = FormElements[element.type].designerComponent;
+  console.log("SELECTED EL", selectedElement);
   return (
     <div
       ref={draggable.setNodeRef}
@@ -118,6 +119,10 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
       className="relative h-[120px]rflex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
       onMouseEnter={() => setIsMouseOver(true)}
       onMouseLeave={() => setIsMouseOver(false)}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelectedElement(element);
+      }}
     >
       <div
         ref={topHalf.setNodeRef}
@@ -133,7 +138,10 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
             <Button
               className="flex border rounded-md rounded-r-none rounded-t-none bg-red-500"
               variant={"outline"}
-              onClick={() => removeElement(element.id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                removeElement(element.id);
+              }}
             >
               <BiSolidTrash className="h-6 w-6" />
             </Button>

@@ -118,7 +118,6 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
   });
 
   const DesignerComponent = FormElements[element.type].designerComponent;
-  console.log("SELECTED EL", selectedElement);
   return (
     <div
       ref={draggable.setNodeRef}
